@@ -1,6 +1,83 @@
 AngularJS
 
+http://www.ng-newsletter.com/posts/how-to-learn-angular.html
+
+
 http://www.ng-newsletter.com/posts/beginner2expert-how_to_start.html
+http://www.ng-newsletter.com/posts/beginner2expert-scopes.html
+http://www.ng-newsletter.com/posts/beginner2expert-data-binding.html
+http://www.ng-newsletter.com/posts/beginner2expert-directives.html
+http://www.ng-newsletter.com/posts/beginner2expert-services.html
+http://www.ng-newsletter.com/posts/beginner2expert-config.html
+
+
+
+AngularJS extends HTML with ng-directives.
+
+The ng-app directive defines an AngularJS application.
+
+The ng-model directive binds the value of HTML controls (input, select, textarea) to application data.
+
+The ng-bind directive binds application data to the HTML view.
+
+angular.module
+To define an AngularJS app, we first need to define an angular.module. An Angular module is simply a collection of functions that are run when the application is “booted.” 
+	
+var app = angular.module('myApp', []);
+
+
+Scopes
+A $scope is an object that ties a view (a DOM element) to the controller. In
+the Model-View-Controller structure, this $scope object becomes the model. It
+provides an execution context that is bound to the DOM element (and its children).
+
+Although it sounds complex, the $scope is just a JavaScript object. Both the
+controller and the view have access to the $scope so it can be used for
+communication between the two. This $scope object will house both the data
+and the functions that we’ll want to run in the view, as we’ll see.
+
+
+
+
+
+
+Bootstrap[edit]
+The tasks performed by the AngularJS bootstrapper occur in three phases[10] after the DOM has been loaded:
+
+Creation of a new Injector
+Compilation of the directives that decorate the DOM
+Linking of all directives to scope
+AngularJS directives allow the developer to specify custom and reusable HTML-like elements and attributes that define data bindings and the behavior of presentation components. Some of the most commonly used directives are:
+
+ng-app
+	Declares the root element of an AngularJS application, under which directives can be used to declare bindings and define behavior.
+ng-bind
+	Sets the text of a DOM element to the value of an expression. For example, <span ng-bind="name"></span> displays the value of ‘name’ inside the span element. Any change to the variable ‘name’ in the application's scope reflect instantly in the DOM.
+ng-model
+	Similar to ng-bind, but establishes a two-way data binding between the view and the scope.
+ng-model-options
+	Provides tuning for how model updates are done.
+ng-class
+	Lets class attributes be dynamically loaded.
+ng-controller
+	Specifies a JavaScript controller class that evaluates HTML expressions.
+ng-repeat
+	Instantiate an element once per item from a collection.
+ng-show & ng-hide
+	Conditionally show or hide an element, depending on the value of a boolean expression. Show and hide is achieved by setting the CSS display style.
+ng-switch
+	Conditionally instantiate one template from a set of choices, depending on the value of a selection expression.
+ng-view
+	The base directive responsible for handling routes that resolve JSON before rendering templates driven by specified controllers.
+ng-if
+	Basic if statement directive that allow to show the following element if the conditions are true. When the condition is false, the element is removed from the DOM. When true, a clone of the compiled element is re-inserted
+ng-aria
+	A module for accessibility support of common ARIA attributes.
+ng-animate
+	A module provides support for JavaScript, CSS3 transition and CSS3 keyframe animation hooks within existing core and custom directives.
+
+Since ng-* attributes are not valid in HTML specifications, data-ng-* can also be used as a prefix. For example, both ng-app and data-ng-app are valid in AngularJS.
+
 
 
 What did we just do? We wrote code to teach the browser a new HTML element <app-info>, and used it in the view to display each app's details.
