@@ -1,49 +1,4 @@
 
-Learn Angular:
-	http://www.yearofmoo.com/2012/08/use-angularjs-to-power-your-web-application.html
-	http://www.yearofmoo.com/2012/10/more-angularjs-magic-to-supercharge-your-webapp.html
-
-	http://www.codecademy.com/courses/javascript-advanced-en-2hJ3J/0/1
-
-	http://www.tutorialspoint.com/angularjs/index.htm
-	http://www.tutorialspoint.com/angularjs/angularjs_quick_guide.htm
-
-	https://thinkster.io/angulartutorial/a-better-way-to-learn-angularjs/
-	https://thinkster.io/mean-stack-tutorial/
-	
-	https://twitter.com/toddmotto
-	https://www.airpair.com/angularjs/posts/angularjs-tutorial
-	
-	http://www.ng-newsletter.com/posts/
-	http://www.ng-newsletter.com/posts/beginner2expert-how_to_start.html
-	
-	http://weblogs.asp.net/dwahlin/video-tutorial-angularjs-fundamentals-in-60-ish-minutes
-	http://weblogs.asp.net/dwahlin/learning-angularjs-by-example-the-customer-manager-application
-	
-	https://egghead.io/technologies/angularjs
-	
-	https://github.com/curran/portfolio
-	https://www.youtube.com/watch?v=TRrL5j3MIvo
-	https://www.youtube.com/watch?v=6J08m1H2BME
-	https://github.com/curran/screencasts/tree/gh-pages/introToAngular
-	
-	https://www.codeschool.com/courses/shaping-up-with-angular-js
-	
-
-AngularJS
-http://www.ng-newsletter.com/posts/beginner2expert-how_to_start.html
-http://www.w3schools.com/angular/angular_events.asp
-
-
-Building a Single Page Application with ASP.NET and AngularJS
-http://channel9.msdn.com/Events/Build/2014/3-644
-
-http://www.w3schools.com/angular/angular_controllers.asp
-
-http://conceptf1.blogspot.ca/2014/04/learning-angularjs-part2.html
-
-
-
 1.Npm
 https://www.npmjs.com/
 
