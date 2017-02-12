@@ -1,10 +1,11 @@
 <!doctype html>
 <html>
   <head>
-    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://s3.amazonaws.com/codecademy-content/projects/bootstrap.min.css" rel="stylesheet" />
     <link href="css/main.css" rel="stylesheet" />
+
     <!-- Include the AngularJS library -->
-    <script src="js/shared/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
   </head>
   <body ng-app="AppMarketApp">
     <div class="header">
@@ -17,6 +18,7 @@
       <div class="container">
          <div class="card" ng-repeat="app in apps">
           <app-info info="app"></app-info>
+          <install-app></install-app>
         </div>
       </div>
     </div>
@@ -29,6 +31,8 @@
 
     <!-- Directives -->
     <script src="js/directives/appInfo.js"></script>
+    <script src="js/directives/installApp.js"></script>
+
 
   </body>
-</html
+</html>
