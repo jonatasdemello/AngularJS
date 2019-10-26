@@ -1,0 +1,301 @@
+<!doctype html>
+<html>
+<head>
+	<!-- script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script -->
+	<script src="js/lodash.core.min.js"></script>
+	<script src="js/lodash.min.js"></script>
+</head>
+<script>
+/*
+// Load the full build.
+var _ = require('lodash');
+
+// Load the core build.
+var _ = require('lodash/core');
+// Load the FP build for immutable auto-curried iteratee-first data-last methods.
+var fp = require('lodash/fp');
+ 
+// Load method categories.
+var array = require('lodash/array');
+var object = require('lodash/fp/object');
+ 
+// Cherry-pick methods for smaller browserify/rollup/webpack bundles.
+var at = require('lodash/at');
+var curryN = require('lodash/fp/curryN');
+*/
+
+
+
+// You first define "the collection you want to iterate through":
+var myArray = ["lazy cat", "wild dog", "hidden Lorbo", "Alf", "POTUS"];
+
+// You then define "the piece of logic you wish to be applied for each item":
+var myFunction = function(element) {
+  // do something with the element
+  //document.writeln(element);
+  console.log(element);
+};
+
+// And finally, you leverage Lodash#forEach:
+_(myArray).forEach(myFunction); // looping chore/complexity abstracted away!
+
+
+
+/*
+	https://colintoh.com/blog/lodash-10-javascript-utility-functions-stop-rewriting
+*/
+
+// 1. Basic for loop.
+
+for(var i = 0; i < 5; i++) {
+    // ....
+	console.log('for: ', i);
+}
+/*
+// 2. Using Array's join and split methods
+Array.apply(null, Array(5)).forEach(function(){
+    console.log('apply: ');
+});
+*/
+console.log(_.min([1, 2, 3]));
+
+// Lodash
+_.times(5, function(index){
+    console.log('_.times: ',index);
+});
+
+
+
+
+//2) Loop through a collection and return a deeply-nested property from each item
+
+	// Fetch the name of the first pet from each owner
+var ownerArr = [{
+    "owner": "Colin",
+    "pets": [{"name":"dog1"}, {"name": "dog2"}]
+	}, {
+    "owner": "John",
+    "pets": [{"name":"dog3"}, {"name": "dog4"}]
+}];
+
+// Array's map method.
+ownerArr.map(function(owner){
+   return owner.pets[0].name;
+});
+
+// Lodash
+var res = _.map(ownerArr, 'pets[0].name');
+console.log(res);
+
+
+
+
+//3) Create an array of N size and populate them with unique values of the same prefix
+
+	// Create an array of length 6 and populate them with unique values. The value must be prefix with "ball_".
+	// eg. [ball_0, ball_1, ball_2, ball_3, ball_4, ball_5]
+
+// Array's map method.
+Array.apply(null, Array(6)).map(function(item, index){
+    return "ball_" + index;
+});
+
+
+// Lodash
+res = _.times(6, _.uniqueId.bind(null, 'ball_'));
+console.log(res);
+
+//Get rid of the .bind(null,...)
+// Lodash
+res = _.times(6, _.partial(_.uniqueId, 'ball_'));
+console.log(res);
+
+
+
+
+//4) Deep-cloning Javascript object
+
+var objA = {
+    "name": "colin"
+}
+
+// Normal method? Too long. See Stackoverflow for solution: http://stackoverflow.com/questions/4459928/how-to-deep-clone-in-javascript
+
+// Lodash
+var objB = _.cloneDeep(objA);
+console.log( "equal? ", objB === objA );// false
+
+
+
+
+// 5) Get Random Number between a range
+	// Get a random number between 15 and 20.
+
+// Naive utility method
+function getRandomNumber(min, max){
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+getRandomNumber(15, 20);
+
+// Lodash
+_.random(15, 20);
+
+
+//Additional option for _.random
+_.random(20); // Return random number between 0 to 20
+_.random(15, 20, true); // Return random floating numbers between 15 and 20
+
+
+
+
+//6) Extending object
+	// Adding extend function to Object.prototype
+
+Object.prototype.extend = function(obj) {
+    for (var i in obj) {
+        if (obj.hasOwnProperty(i)) {
+            this[i] = obj[i];
+        }
+    }
+};
+
+var objA = {"name": "colin", "car": "suzuki"};
+var objB = {"name": "james", "age": 17};
+
+objA.extend(objB);
+objA; // {"name": "james", "age": 17, "car": "suzuki"};
+
+// Lodash
+_.assign(objA, objB);
+
+//The _.assign method can also accept multiple objects for extension.
+// Extending multiple objects
+
+var objA = {"name": "colin", "car": "suzuki"};
+var objB = {"name": "james", "age": 17};
+var objC = {"pet": "dog"};
+
+// Lodash
+_.assign(objA, objB, objC)
+// {"name": "james", "car": "suzuki", "age": 17, "pet": "dog"}
+
+
+
+//7) Removing properties from object
+
+// Naive method: Remove an array of keys from object
+Object.prototype.remove = function(arr) {
+    var that = this;
+    arr.forEach(function(key){
+        delete(that[key]);
+    });
+};
+
+var objA = {"name": "colin", "car": "suzuki", "age": 17};
+
+objA.remove(['car', 'age']);
+objA; // {"name": "colin"}
+
+// Lodash
+objA = _.omit(objA, ['car', 'age']); // {"name": "colin"}
+
+// The naive method only considers an array parameter. We might also want to cater for a single string parameter for single key deletion or even accepting a comparator.
+// More use-cases
+
+var objA = {"name": "colin", "car": "suzuki", "age": 17};
+
+// Lodash
+objA = _.omit(objA, 'car'); // {"name": "colin", "age": 17};
+objA = _.omit(objA, _.isNumber); // {"name": "colin"};
+
+//Once again, catering for such cases would have added substantial amount of code into the naive utility function. 
+//_.omit method help us handle all those situation.
+// You should also note that _.omit returns a new object that has no reference to the object passed in. This is really useful if you do not want your omitted object to be affected by changes to the former object.
+
+
+
+//8) Select properties from another object to form new object
+
+// Naive method: Returning a new object with selected properties 
+Object.prototype.pick = function(arr) {
+    var _this = this;
+    var obj = {};
+    arr.forEach(function(key){
+        obj[key] = _this[key];
+    });
+    return obj;
+};
+
+var objA = {"name": "colin", "car": "suzuki", "age": 17};
+
+var objB = objA.pick(['car', 'age']);
+// {"car": "suzuki", "age": 17}
+
+// Lodash
+var objB = _.pick(objA, ['car', 'age']);
+// {"car": "suzuki", "age": 17}
+
+//The _.pick method is the opposite of _.omit where you get to pick the selected properties of another object. _.pick comes with all the benefits that _.omit provides too - New object creation and ability to take in single string, array and comparator functions.
+
+
+
+
+//9) Selecting a random item from a list
+
+var luckyDraw = ["Colin", "John", "James", "Lily", "Mary"];
+
+function pickRandomPerson(luckyDraw){
+    var index = Math.floor(Math.random() * (luckyDraw.length));
+    return luckyDraw[index];
+}
+
+pickRandomPerson(luckyDraw); // John
+
+// Lodash
+_.sample(luckyDraw); // Colin
+
+//The _.sample method also comes with an additional bonus feature - Selecting multiple random item from list.
+//Multiple random item
+
+var luckyDraw = ["Colin", "John", "James", "Lily", "Mary"];
+
+// Lodash - Getting 2 random item
+_.sample(luckyDraw, 2); // ['John','Lily']
+
+
+//10) Error handling for JSON.parse
+
+// Using try-catch to handle the JSON.parse error
+function parse(str){
+    try {
+        return JSON.parse(str);
+    }
+
+    catch(e) {
+        return false;
+    }
+}
+
+// With Lodash
+function parseLodash(str){
+    return _.attempt(JSON.parse.bind(null, str));
+}
+
+parse('a'); // false
+parseLodash('a'); // Return an error object
+
+parse('{"name": "colin"}'); // Return {"name": "colin"}
+parseLodash('{"name": "colin"}'); // Return {"name": "colin"}
+
+// If you are using JSON.parse in your application and you are not handling the errors, I urge you to do so immediately. 
+// An unhandled JSON.parse error is like a ticking bomb. Never assume the JSON object you are receiving is completely valid. But I digress.
+// Although we didn't completely replace the try-catch utility method, we managed to remove the unsightly try-catch blocks. The _.attempt prevents JSON.parse from throwing an application error. Instead, it return an Error object.
+
+
+</script>
+<body>
+<pre>http://colintoh.com/blog/lodash-10-javascript-utility-functions-stop-rewriting</pre>
+<p>check console log.</p>
+</body>
+</html>
